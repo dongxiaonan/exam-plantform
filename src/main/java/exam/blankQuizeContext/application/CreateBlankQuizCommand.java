@@ -1,0 +1,20 @@
+package exam.blankQuizeContext.application;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Value;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+public class CreateBlankQuizCommand {
+    private String teacherId;
+    private List<Quiz> quizzes;
+
+    @Value
+    public static class Quiz {
+        private String quizId;
+        private int score;
+    }
+}
