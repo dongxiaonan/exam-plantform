@@ -1,5 +1,6 @@
 package exam.blankQuizeContext.application;
 
+import exam.blankQuizeContext.domain.model.blankQuiz.BlankQuiz;
 import exam.blankQuizeContext.domain.model.blankQuiz.BlankQuizId;
 import exam.blankQuizeContext.domain.model.blankQuiz.BlankQuizRepository;
 import exam.paperContext.domain.service.BlankQuizClient;
@@ -24,6 +25,25 @@ public class BlankQuizApplicationService {
     }
 
     public BlankQuizId create(CreateBlankQuizCommand command) {
-        return null;
+        final String teacherId = command.getTeacherId();
+        final BlankQuizId blankQuizId = blankQuizRepository.nextBlankQuizId();
+
+        final BlankQuiz blankQuiz = BlankQuiz.create(blankQuizId, teacherId, command.getContent(), command.getReferenceAnswer(), command.getScore());
+        blankQuizRepository.save(blankQuiz);
+
+        return blankQuizId;
+    }
+
+    public void revise(String blankQuizId, CreateBlankQuizCommand command) {
+        final BlankQuiz blankQuiz = blankQuizRepository.find(new BlankQuizId(blankQuizId));
+        blankQuiz.revise(command.getTeacherId(), command.getContent(), command.getReferenceAnswer(), command.getScore());
+
+        blankQuizRepository.save(blankQuiz);
+    }
+
+    public void delete(String blankQuizId) {
+        final BlankQuiz blankQuiz = blankQuizRepository.find(new BlankQuizId(blankQuizId));
+
+        blankQuizRepository.remove(blankQuiz);
     }
 }

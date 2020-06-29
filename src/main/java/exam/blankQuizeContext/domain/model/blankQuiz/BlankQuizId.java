@@ -11,11 +11,6 @@ import java.util.Objects;
 public class BlankQuizId implements ValueObject<BlankQuizId> {
     private String id;
 
-    public String nextId() {
-        //TODO Generate ID
-        return null;
-    }
-
     @Override
     public boolean sameValueAs(BlankQuizId other) {
         return equals(other);
