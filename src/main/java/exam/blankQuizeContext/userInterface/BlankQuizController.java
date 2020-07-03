@@ -35,13 +35,13 @@ public class BlankQuizController {
         return blankQuizReadRepository.getAllByReversedOrder();
     }
 
-    @PutMapping("/blankQuiz/{blankQuizId}")
+    @PutMapping("/blankQuizzes/{blankQuizId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void update(@PathVariable String blankQuizId, @RequestBody CreateBlankQuizCommand command) {
         blankQuizApplicationService.revise(blankQuizId, command);
     }
 
-    @DeleteMapping("/blankQuiz/{blankQuizId}")
+    @DeleteMapping("/blankQuizzes/{blankQuizId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void delete(@PathVariable String blankQuizId) {
         blankQuizApplicationService.delete(blankQuizId);

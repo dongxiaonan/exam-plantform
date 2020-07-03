@@ -1,20 +1,23 @@
 package exam.blankQuizeContext.infrastructure;
 
 import exam.blankQuizeContext.domain.model.blankQuiz.BlankQuiz;
-import exam.paperContext.domain.model.paper.Paper;
-import exam.paperContext.domain.model.paper.PaperId;
-import exam.paperContext.domain.model.paper.PaperRepository;
+import exam.blankQuizeContext.domain.model.blankQuiz.BlankQuizRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 public class MemoryBlankQuizReadRepository {
+    private BlankQuizRepository blankQuizRepository;
+
+    @Autowired
+    public MemoryBlankQuizReadRepository(BlankQuizRepository blankQuizRepository) {
+        this.blankQuizRepository = blankQuizRepository;
+    }
+
+
     public List<BlankQuiz> getAllByReversedOrder() {
-        return null;
+        return blankQuizRepository.getAll();
     }
 }
